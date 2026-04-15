@@ -1,23 +1,7 @@
 const Customer = require("../models/user.model");
 const ejs = require('ejs')
-const bcrypt = require("bcryptjs");
-const nodemailer = require("nodemailer");
-
-// umqs hexv roqy zocl
-const transporter = nodemailer.createTransporter({
-  service: "gmail",
-  auth: {
-    user: 'deborahalabi49@gmail.com',
-    pass: 'umqs hexv roqy zocl'
-  }
-});
-
-let mailOptions = {
-  from: 'deborahalabi49@gmail.com',
-  to: [],
-  subject: 'Welcome to our platform',
-  text: 'Thank you for signing up!'
-};
+const bcrypt = require('bcryptjs')
+const nodemailer = require('nodemailer');
 
 
 const getSignup = (req, res) => {
@@ -33,14 +17,13 @@ const getDashboard = (req, res) => {
 }
 
 const postSignup = (req, res) => {
-
-  const user = req.body;
-
   let salt = bcrypt.genSaltSync(10);
   let hashedPassword = bcrypt.hashSync(req.body.password, salt);
 
+  // Overwrite the plain password with the hashed one
   req.body.password = hashedPassword;
 
+  const user = req.body;
 
   const newCustomer = new Customer(user);
 
@@ -111,13 +94,18 @@ const postSignin = (req, res) => {
         console.log("Invalid email");
         return res.status(400).json({ message: "Invalid email or password" })
       }
+      // if (foundCustomers.password !== password) {
+      //     console.log("Invalid Password");
+      //     return res.status(400).json({ message: "Invalid email or password"});
+      // }
 
 
+      // Compare provided password with hashed one
       const isMatch = bcrypt.compareSync(password, foundCustomers.password);
 
       if (!isMatch) {
-        console.log("Invalid password");
-        return res.status(400).json({ message: "Invalid email or password" })
+        console.log("Invalid Password");
+        return res.status(400).json({ message: "Invalid email or password" });
       }
 
 
