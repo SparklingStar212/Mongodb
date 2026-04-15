@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EJS - Practice</title>
+  <link rel="stylesheet" href="/CSS/auth.css">
+</head>
+<body>
+  <form class="form" action="/user/register" method="POST">
+    <p class="form-title">Sign up for your account</p>
+    <div class="input-container">
+      <input type="text" name="firstName" placeholder="Enter first name">
+      <span>
+      </span>
+    </div>
+    <div class="input-container">
+      <input type="text" name="lastName" placeholder="Enter last name">
+      <span>
+      </span>
+    </div>
+    <div class="input-container">
+      <input type="email" name="email" placeholder="Enter email">
+      <span>
+      </span>
+    </div>
+    <div class="input-container">
+      <input type="password" name="password" placeholder="Enter password">
+    </div>
+    <button type="submit" class="submit">
+      Sign up
+    </button>
+
+    <p class="signup-link">
+      Already have an account?
+      <a href="">Sign in</a>
+    </p>
+  </form>
+
+</body>
+</html>
