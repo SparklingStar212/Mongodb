@@ -5,7 +5,7 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 const userRoute = require("./routes/user.route");
 dotenv.config();
-const port = process.env.port
+const port = process.env.PORT
 const URI = process.env.MONGODB_URI;
 
 app.use(cors());

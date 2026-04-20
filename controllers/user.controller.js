@@ -36,18 +36,18 @@ const postSignup = (req, res) => {
       let transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
-          user: 'adedayodaniel1711@gmail.com',
+          user: 'deborahalabi49@gmail.com',
           // a special password generated from google settings not your original password
           // Step one: Enable 2-step verification
           // Step two: Generate app password
-          pass: 'mawl exta bquu strt'
+          pass: 'cpkw dvec rwwz iffb'
         }
       });
 
       // This is the information about the email you are sending
       let mailOptions = {
-        from: 'adedayodaniel1711@gmail.com',
-        to: [user.email, "victoryajayi90@gmail.com"],
+        from: 'deborahalabi49@gmail.com',
+        to: [user.email],
         subject: 'Welcome to our Application',
         html:
           `
@@ -109,12 +109,19 @@ const postSignin = (req, res) => {
       }
 
 
+
+      // res.redirect("/user/dashboard");
+
       // Success
-      console.log("Login Successful for", foundCustomers.email);
-
-
-      res.redirect("/user/dashboard");
-
+      return res.json({
+        message: "Login Successful",
+        user: {
+          id: foundCustomers._id,
+          email: foundCustomers.email,
+          firstName: foundCustomers.firstName,
+          lastName: foundCustomers.lastName
+        }
+      })
 
 
 
@@ -125,6 +132,27 @@ const postSignin = (req, res) => {
     });
 }
 
+const getAllUsers = (req, res) => {
+  Customer.find()
+    .then((allUsers) => {
+      console.log("All users:", allUsers);
+      res.status(200).json(
+        {
+          message: "Registered Users",
+          users: allUsers
+        }
+      );
+    })
+    .catch((err) => {
+      console.error("Error fetching users:", err);
+      res.status(500).send("Internal server error");
+    });
+};
 
 
-module.exports = { postSignup, getSignup, postSignin, getSignin, getDashboard }
+
+module.exports = { postSignup, getSignup, postSignin, getSignin, getDashboard, getAllUsers }
+
+
+
+
